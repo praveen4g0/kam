@@ -70,11 +70,11 @@ prepare-test-cluster:
 .PHONY: e2e
 e2e:
 CURRENT_TIME ?= $(shell date "+%Y.%m.%d-%H.%M.%S")
-GODOG_OPTS = --godog.tags=basic --godog.format=junit & go install github.com/jstemmer/go-junit-report/v2@latest
+GODOG_OPTS = --godog.tags=basic --godog.format=junit
 
 e2e:
-	@go test --timeout=180m ./test/e2e -v $(GODOG_OPTS) 2>&1| go-junit-report -set-exit-code > kam-test-${CURRENT_TIME}.xml
+	@go test --timeout=180m ./test/e2e -v $(GODOG_OPTS) 
 
 .PHONY: e2e-local
 e2e-local:
-	@go test --timeout=180m ./test/e2e -v --godog.tags=local  2>&1| go-junit-report -set-exit-code > kam-test-${CURRENT_TIME}.xml
+	@go test --timeout=180m ./test/e2e -v --godog.tags=local 
