@@ -120,7 +120,7 @@ func envVariableCheck() bool {
 		for _, envVar := range envVars {
 			_, ok := os.LookupEnv(envVar)
 			if !ok {
-				//fmt.Printf("%s is not set\n", envVar)
+				fmt.Printf("%s is not set\n", envVar)
 				return false
 			}
 		}
@@ -138,10 +138,10 @@ func envVariableCheck() bool {
 		}
 	} else {
 		if val == "prow" {
-			//fmt.Printf("Running e2e test in OpenShift CI\n")
+			fmt.Printf("Running e2e test in OpenShift CI\n")
 			majorVersion, err := openhiftServerVersion()
 			if err != nil {
-				//fmt.Printf("OpenShift API server version not found\n")
+				fmt.Printf("OpenShift API server version not found\n")
 				return false
 			}
 			os.Setenv("SERVICE_REPO_URL", "https://github.com/kam-bot/taxi")
@@ -151,7 +151,7 @@ func envVariableCheck() bool {
 			os.Setenv("DOCKERCONFIGJSON_PATH", os.Getenv("KAM_QUAY_DOCKER_CONF_SECRET_FILE"))
 			os.Setenv("GIT_ACCESS_TOKEN", os.Getenv("GITHUB_TOKEN"))
 		} else {
-			//fmt.Printf("You cannot run e2e test locally against OpenShift CI\n")
+			fmt.Printf("You cannot run e2e test locally against OpenShift CI\n")
 			return false
 		}
 		return true
